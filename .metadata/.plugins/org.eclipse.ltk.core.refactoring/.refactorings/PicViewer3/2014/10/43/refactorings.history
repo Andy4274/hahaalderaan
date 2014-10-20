@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;PicViewer3/res/layout/fileitem.xml&apos; to &apos;filelistitem.xml&apos;" description="Rename resource &apos;fileitem.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/fileitem.xml" name="filelistitem.xml" stamp="1413826917876" updateReferences="true"/>
+</session>

@@ -2034,3 +2034,6 @@ Caused by: java.lang.NullPointerException
 	at java.lang.reflect.Method.invoke(Unknown Source)
 	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
 	... 44 more
+
+!ENTRY org.eclipse.equinox.security 1 0 2014-10-20 14:42:03.898
+!MESSAGE New keyring password generated. 

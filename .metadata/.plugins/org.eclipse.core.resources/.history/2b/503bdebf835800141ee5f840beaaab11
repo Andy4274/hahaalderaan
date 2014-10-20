@@ -1,0 +1,5 @@
+package om.jassoftware.picviewer3;
+
+public class FileItem {
+
+}

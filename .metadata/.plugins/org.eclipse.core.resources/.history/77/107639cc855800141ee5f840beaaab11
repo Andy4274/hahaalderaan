@@ -1,0 +1,84 @@
+package om.jassoftware.picviewer3;
+
+import java.io.File;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+public class FileItem {
+
+	Bitmap icon;
+	Bitmap full;
+	Bitmap scaled;
+	File src;
+	int picsize;
+	
+	public FileItem(File f){
+		
+	}
+	public FileItem(File f, Bitmap bm){
+		src = f;
+		icon = bm;
+		
+	}
+
+	
+	public void loadBitmap(File f){
+		BitmapLoader loader = new BitmapLoader(f);
+	}
+	
+	
+	public class BitmapLoader extends AsyncTask<File, Void, Bitmap>{
+		
+		File src;
+		
+		public BitmapLoader(File f){
+			src = f;
+		}
+	
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			if (result!=null){
+				full = result;
+				DisplayMetrics metrics = null;
+				WindowManager wm = (WindowManager) MainActivity.c.getSystemService(Context.WINDOW_SERVICE);
+				wm.getDefaultDisplay().getMetrics(metrics);
+				switch (metrics.densityDpi){
+					case DisplayMetrics.DENSITY_LOW:
+						picsize = 36;
+						break;
+					case DisplayMetrics.DENSITY_MEDIUM:
+						picsize = 48;
+						break;
+					case DisplayMetrics.DENSITY_HIGH:
+						picsize = 72;
+						break;
+					case DisplayMetrics.DENSITY_XHIGH:
+						picsize = 96;
+						break;
+					case DisplayMetrics.DENSITY_XXHIGH:
+						picsize = 144;
+						break;
+					case DisplayMetrics.DENSITY_XXXHIGH:
+						picsize = 192;
+						break;
+					default:  //probably the google tv setting, so 512
+						picsize = 512;
+						break;
+				}
+				scaled = Bitmap.createScaledBitmap(result, picsize, picsize, false);
+			}
+		}
+		
+		@Override
+		protected Bitmap doInBackground(File... src) {
+			Bitmap result = null;
+			result = BitmapFactory.decodeFile(src[0].getAbsolutePath());
+			return result;
+		}
+		
+	} //end of BitmapLoader
+}
