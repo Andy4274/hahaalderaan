@@ -41,25 +41,6 @@ public class FileItem {
 		scaled = null;
 		loadBitmap(src);
 	}
-	public FileItem(File f, Bitmap bm){
-		src = f;
-		icon = bm;
-		full = null;
-		scaled = null;
-		loadBitmap(src);
-	}
-
-	public Bitmap getBitmap(){
-		if (full!=null){
-			return full;
-		} else {
-			if (icon!=null){
-				return icon;
-			}
-		}
-		//if none are set return null
-		return null;
-	}
 	
 	public Bitmap getBitmap(int type){
 		switch (type){
@@ -132,9 +113,9 @@ public class FileItem {
 		}
 		
 		@Override
-		protected Bitmap doInBackground(File... src) {
+		protected Bitmap doInBackground(File... f) {
 			Bitmap result = null;
-			result = BitmapFactory.decodeFile(src[0].getAbsolutePath());
+			result = BitmapFactory.decodeFile(f[0].getAbsolutePath());
 			return result;
 		}
 		
