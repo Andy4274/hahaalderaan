@@ -1,4 +1,4 @@
-package com.jassoftware.picviewer;
+package com.jassoftware.picviewer2;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.app.Activity;
 import android.app.FragmentManager;

@@ -1,0 +1,98 @@
+package com.jassoftware.picviewer;
+
+import java.io.File;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+public class FileItem {
+
+	File f;
+	Bitmap bm1;
+	Bitmap bm2;
+	Bitmap bmScaled;
+	int maxSize = 0;
+	
+	public FileItem(){
+		f = null;
+		bm1 = null;
+		bm2 = null;
+		bmScaled = null;
+	}
+	
+	public FileItem(File src, Bitmap b){
+		f = src;
+		bm1 = b;
+		DisplayMetrics metrics = new DisplayMetrics();
+		WindowManager wm = (WindowManager) MainActivity.c.getSystemService(Context.WINDOW_SERVICE);
+		wm.getDefaultDisplay().getMetrics(metrics);
+		switch (metrics.densityDpi){
+			case DisplayMetrics.DENSITY_LOW:
+				maxSize = 36;
+				break;
+			case DisplayMetrics.DENSITY_MEDIUM:
+				maxSize = 48;
+				break;
+			case DisplayMetrics.DENSITY_HIGH:
+				maxSize = 72;
+				break;
+			case DisplayMetrics.DENSITY_XHIGH:
+				maxSize = 96;
+				break;
+			case DisplayMetrics.DENSITY_XXHIGH:
+				maxSize = 144;
+				break;
+			case DisplayMetrics.DENSITY_XXXHIGH:
+				maxSize = 192;
+				break;
+			default:
+				maxSize = 512;
+				break;
+		}
+		//load bm2
+	}
+	
+	public Bitmap getBitmap(int i){
+		switch (i){
+			case 1:
+				return bm1;
+			case 2:
+				return bm2;
+			case 3:
+				return bmScaled;
+			default:
+				return bm1;
+		}
+	}
+	
+	public String getName(){
+		return f.getName();
+	}
+
+
+	public class BitmapLoader extends AsyncTask<File , Void, Bitmap>{
+
+		@Override
+		protected void onPostExecute(Bitmap result) {
+			bm2 = result;
+			bmScaled = Bitmap.createScaledBitmap(result, maxSize, maxSize, false);
+		}
+
+		@Override
+		protected Bitmap doInBackground(File... src) {
+			Bitmap bm = BitmapFactory.decodeFile(src[0].getAbsolutePath());			
+			return bm;
+		}
+		
+		
+	}
+
+}
+
+
+
+

@@ -1,4 +1,4 @@
-package com.jassoftware.picviewer;
+package com.jassoftware.picviewer2;
 
 import java.util.ArrayList;
 
