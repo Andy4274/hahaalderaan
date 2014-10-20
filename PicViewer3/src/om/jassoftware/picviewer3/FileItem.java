@@ -39,15 +39,50 @@ public class FileItem {
 		}
 		full = null;
 		scaled = null;
+		loadBitmap(src);
 	}
 	public FileItem(File f, Bitmap bm){
 		src = f;
 		icon = bm;
-		loadBitmap(f);
+		full = null;
+		scaled = null;
+		loadBitmap(src);
 	}
 
+	public Bitmap getBitmap(){
+		if (full!=null){
+			return full;
+		} else {
+			if (icon!=null){
+				return icon;
+			}
+		}
+		//if none are set return null
+		return null;
+	}
 	
-	public void loadBitmap(File f){
+	public Bitmap getBitmap(int type){
+		switch (type){
+			case 0:  //icon
+				return icon;
+			case 1:  //full, if available
+				if (full!=null){
+					return full;
+				} else {
+					return icon;
+				}
+			case 2:  //caled, if available
+				if (scaled!=null){
+					return scaled;
+				} else {
+					return icon;
+				}
+			default:
+				return icon;
+		}
+	}
+	
+	protected void loadBitmap(File f){
 		BitmapLoader loader = new BitmapLoader(f);
 		loader.execute(f);
 	}
@@ -104,4 +139,4 @@ public class FileItem {
 		}
 		
 	} //end of BitmapLoader
-}
+}  //end of FileItem
