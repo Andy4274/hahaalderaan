@@ -4,6 +4,10 @@
 	<item value="false" key="org.eclipse.jdt.ui.cleanup.use_dialog_profile"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 	</section>
+	<section name="RefactoringWizard.preview">
+		<item value="600" key="width"/>
+		<item value="400" key="height"/>
+	</section>
 	<section name="RefactoringWizard.Clean Up">
 		<item value="651" key="width"/>
 		<item value="400" key="height"/>
